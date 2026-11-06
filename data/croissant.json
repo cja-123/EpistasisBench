@@ -53,7 +53,10 @@
   "url": "https://github.com/cja-123/EpistasisBench",
   "citeAs": "Chen, Junan; Min, Jianwen; He, Liang; Zhu, Yiheng (2026). EpistasisBench: Revealing the Limits of Zero-Shot Scoring Schemes for Protein Language Models.",
   "license": "https://spdx.org/licenses/MIT.html",
-  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "conformsTo": [
+    "http://mlcommons.org/croissant/1.1",
+    "http://mlcommons.org/croissant/RAI/1.0"
+  ],
   "version": "1.0.0",
   "datePublished": "2026-11-06",
   "isAccessibleForFree": true,
@@ -284,6 +287,9 @@
       ]
     }
   ],
+  "rai:dataCollection": "The dataset contains no newly measured data. It is a curated subset of the Tsuboyama et al. (2023) mega-scale deep mutational scanning measurements, restricted to assays that also appear in ProteinGym. For every assay, double mutants were matched with the two single mutants measured in the same experiment, so that ddG_AB, ddG_A and ddG_B all come from one consistent experimental setting.",
+  "rai:dataCollectionType": "Secondary Data Analysis",
+  "rai:dataPreprocessingProtocol": "ddG_int was computed as ddG_AB - ddG_A - ddG_B. Thermodynamic coupling values were recomputed from an additive-model fit with MCMC (data/dataset_construction/TC.py). Two subsets were derived: significant epistasis, defined as |thermodynamic coupling| > 0.5 kcal/mol (6,003 double mutations, 35 proteins), and sign epistasis, defined by a four-condition disjunction on the single-mutant boundaries with a tolerance of epsilon = 0.07 kcal/mol (3,267 double mutations, 31 proteins). No imputation or smoothing was applied; the released table contains no missing values.",
   "rai:dataLimitations": "The dataset is limited to double mutations (k = 2) because large-scale experimental data of higher order is not available. It covers thermodynamic stability (ddG) only and does not represent other functional effects such as binding affinity or enzymatic activity. Although strict filtering was applied to remove noise, the underlying high-throughput measurements carry experimental uncertainty. This dataset is explicitly not recommended for evaluating mutations with depth greater than 2, for predicting absolute stability values rather than relative changes, or for proteins outside the 50 assayed proteins without a transferability check.",
   "rai:dataBiases": "There is a selection bias towards proteins amenable to high-throughput deep mutational scanning and double-mutant cycles, which typically favours small, soluble, well-folded proteins over large multi-domain complexes or membrane proteins. Specific folds or protein families may be over-represented because of the assays that were originally published. Results may therefore not generalise to the full proteome.",
   "rai:personalSensitiveInformation": "None. The dataset contains only protein sequences, mutation identifiers and thermodynamic measurements. It involves no human subjects, demographic attributes or other sensitive personal information.",
