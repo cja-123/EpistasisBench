@@ -1,0 +1,9 @@
+name: epibench-eval
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pandas>=2.1
+  - scipy
+  - scikit-learn

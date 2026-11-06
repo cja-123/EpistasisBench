@@ -1,0 +1,22 @@
+Third-party notice: ESM3 / ESM-C code
+====================================
+
+The directory `esm/` in this folder is a copy of the Python package from
+
+    https://github.com/evolutionaryscale/esm
+
+Copyright (c) EvolutionaryScale, PBC.
+
+It is NOT covered by the MIT license of EpistasisBench (see the LICENSE file at
+the repository root). It is distributed under the Cambrian Open License
+Agreement for the code, as stated in the upstream LICENSE.md:
+
+    https://github.com/evolutionaryscale/esm/blob/main/LICENSE.md
+    https://www.evolutionaryscale.ai/policies/cambrian-open-license-agreement
+
+Model weights are not included. ESM3-open weights are governed by the Cambrian
+Non-Commercial License Agreement; ESM C 600M weights likewise. Review those
+terms before use.
+
+Only `compute_fitness.py` in this folder is original to EpistasisBench and is
+released under the MIT license.
