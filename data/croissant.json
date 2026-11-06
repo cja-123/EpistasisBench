@@ -1,0 +1,335 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "dct": "http://purl.org/dc/terms/",
+    "equivalentProperty": "cr:equivalentProperty",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "samplingRate": "cr:samplingRate",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "EpistasisBench",
+  "description": "EpistasisBench is a thermodynamically stratified zero-shot benchmark for protein language models, built from the Tsuboyama et al. (2023) mega-scale ddG measurements that overlap with ProteinGym. It contains 50,812 double mutations over 50 proteins and 180 residue pairs. Each row gives one double mutant AB together with its two single mutants A and B (ddG_AB, ddG_A, ddG_B), the interaction energy ddG_int = ddG_AB - ddG_A - ddG_B, the thermodynamic coupling value, and the sign / significant epistasis flags.",
+  "url": "https://github.com/cja-123/EpistasisBench",
+  "citeAs": "Chen, Junan; Min, Jianwen; He, Liang; Zhu, Yiheng (2026). EpistasisBench: Revealing the Limits of Zero-Shot Scoring Schemes for Protein Language Models.",
+  "license": "https://spdx.org/licenses/MIT.html",
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "version": "1.0.0",
+  "datePublished": "2026-11-06",
+  "isAccessibleForFree": true,
+  "keywords": [
+    "protein language models",
+    "epistasis",
+    "deep mutational scanning",
+    "zero-shot prediction",
+    "protein stability",
+    "benchmark"
+  ],
+  "creator": [
+    {
+      "@type": "sc:Person",
+      "name": "Junan Chen"
+    },
+    {
+      "@type": "sc:Person",
+      "name": "Jianwen Min"
+    },
+    {
+      "@type": "sc:Person",
+      "name": "Liang He"
+    },
+    {
+      "@type": "sc:Person",
+      "name": "Yiheng Zhu"
+    }
+  ],
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "epistasisbench-csv",
+      "name": "EpistasisBench.csv",
+      "description": "Released label table, 50,812 rows x 12 columns.",
+      "contentUrl": "https://raw.githubusercontent.com/cja-123/EpistasisBench/main/data/EpistasisBench.csv",
+      "encodingFormat": "text/csv",
+      "md5": "97f1cf3191231782b5d713b085e51f34"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "double-mutations",
+      "name": "double-mutations",
+      "description": "One record per double mutation, with the measured single-mutant effects and the derived epistasis annotations.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "double-mutations/uniprot_id",
+          "name": "uniprot_id",
+          "description": "UniProt accession of the assayed protein.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "epistasisbench-csv"
+            },
+            "extract": {
+              "column": "uniprot_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "double-mutations/pdb_id",
+          "name": "pdb_id",
+          "description": "PDB entry of the wild-type structure.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "epistasisbench-csv"
+            },
+            "extract": {
+              "column": "pdb_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "double-mutations/double_mutant",
+          "name": "double_mutant",
+          "description": "Double mutation identifier, written as mutation_A:mutation_B.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "epistasisbench-csv"
+            },
+            "extract": {
+              "column": "double_mutant"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "double-mutations/mutation_A",
+          "name": "mutation_A",
+          "description": "First single mutation of the double mutant.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "epistasisbench-csv"
+            },
+            "extract": {
+              "column": "mutation_A"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "double-mutations/mutation_B",
+          "name": "mutation_B",
+          "description": "Second single mutation of the double mutant.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileObject": {
+              "@id": "epistasisbench-csv"
+            },
+            "extract": {
+              "column": "mutation_B"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "double-mutations/ddG_AB",
+          "name": "ddG_AB",
+          "description": "Measured ddG of the double mutant (kcal/mol). Default target of the dataset.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "epistasisbench-csv"
+            },
+            "extract": {
+              "column": "ddG_AB"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "double-mutations/ddG_A",
+          "name": "ddG_A",
+          "description": "Measured ddG of the first single mutant (kcal/mol).",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "epistasisbench-csv"
+            },
+            "extract": {
+              "column": "ddG_A"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "double-mutations/ddG_B",
+          "name": "ddG_B",
+          "description": "Measured ddG of the second single mutant (kcal/mol).",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "epistasisbench-csv"
+            },
+            "extract": {
+              "column": "ddG_B"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "double-mutations/ddG_int",
+          "name": "ddG_int",
+          "description": "Interaction energy, ddG_AB - ddG_A - ddG_B (kcal/mol).",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "epistasisbench-csv"
+            },
+            "extract": {
+              "column": "ddG_int"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "double-mutations/thermodynamic_coupling_value",
+          "name": "thermodynamic_coupling_value",
+          "description": "Thermodynamic coupling value from the additive-model fit (kcal/mol).",
+          "dataType": "sc:Float",
+          "source": {
+            "fileObject": {
+              "@id": "epistasisbench-csv"
+            },
+            "extract": {
+              "column": "thermodynamic_coupling_value"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "double-mutations/is_sign_epistasis",
+          "name": "is_sign_epistasis",
+          "description": "Whether the mutant belongs to the sign epistasis subset (epsilon = 0.07 kcal/mol).",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileObject": {
+              "@id": "epistasisbench-csv"
+            },
+            "extract": {
+              "column": "is_sign_epistasis"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "double-mutations/is_significant_epistasis",
+          "name": "is_significant_epistasis",
+          "description": "Whether the mutant belongs to the significant epistasis subset (|thermodynamic coupling| > 0.5 kcal/mol).",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileObject": {
+              "@id": "epistasisbench-csv"
+            },
+            "extract": {
+              "column": "is_significant_epistasis"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "rai:dataLimitations": "The dataset is limited to double mutations (k = 2) because large-scale experimental data of higher order is not available. It covers thermodynamic stability (ddG) only and does not represent other functional effects such as binding affinity or enzymatic activity. Although strict filtering was applied to remove noise, the underlying high-throughput measurements carry experimental uncertainty. This dataset is explicitly not recommended for evaluating mutations with depth greater than 2, for predicting absolute stability values rather than relative changes, or for proteins outside the 50 assayed proteins without a transferability check.",
+  "rai:dataBiases": "There is a selection bias towards proteins amenable to high-throughput deep mutational scanning and double-mutant cycles, which typically favours small, soluble, well-folded proteins over large multi-domain complexes or membrane proteins. Specific folds or protein families may be over-represented because of the assays that were originally published. Results may therefore not generalise to the full proteome.",
+  "rai:personalSensitiveInformation": "None. The dataset contains only protein sequences, mutation identifiers and thermodynamic measurements. It involves no human subjects, demographic attributes or other sensitive personal information.",
+  "rai:dataUseCases": "Validated use cases: zero-shot evaluation of protein language models, in particular diagnosing their ability to model non-additive thermodynamic interactions (epistasis) in probability space; benchmarking inference schemes (masked marginal, joint marginal, pseudo-log-likelihood); assessing robustness on extreme mutation samples. Not validated: clinical variant interpretation, prediction for proteins without structural homologues, or training supervised models for absolute stability prediction without further validation. The dataset is a diagnostic tool for model architecture and inference design, not a clinical predictor.",
+  "rai:dataSocialImpact": "Positive impact: supports rational protein engineering and drug design by exposing structural limitations of current AI models, which drives the development of more reliable scientific models of complex biological interactions. Negative impact and risks: improved modelling of molecular interactions has dual-use potential, since better prediction could in principle be misused to design proteins with harmful biological effects. Mitigation: the dual-use risk is stated explicitly in the paper, which argues that such methods should be developed responsibly; the benchmark itself releases only already-published stability measurements.",
+  "rai:hasSyntheticData": false,
+  "prov:wasDerivedFrom": [
+    {
+      "@id": "https://doi.org/10.5281/zenodo.7992926"
+    },
+    {
+      "@id": "https://github.com/OATML-Markslab/ProteinGym"
+    }
+  ],
+  "prov:wasGeneratedBy": [
+    {
+      "@type": "prov:Activity",
+      "prov:type": {
+        "@id": "https://www.wikidata.org/wiki/Q4929239"
+      },
+      "prov:label": "Experimental data collection",
+      "sc:description": "Experimental ddG values were produced by high-throughput deep mutational scanning in Tsuboyama et al. (2023). No new wet-lab data was collected for this benchmark."
+    },
+    {
+      "@type": "prov:Activity",
+      "prov:type": {
+        "@id": "https://www.wikidata.org/wiki/Q5227332"
+      },
+      "prov:label": "Data preprocessing",
+      "sc:description": "A subset of 50,812 double mutations overlapping with ProteinGym was extracted. For each double mutant the two single mutants were matched from the same assay, and ddG_int was computed as ddG_AB - ddG_A - ddG_B. Thermodynamic coupling values were recomputed from additive-model residuals with an MCMC fit (data/dataset_construction/TC.py)."
+    },
+    {
+      "@type": "prov:Activity",
+      "prov:type": {
+        "@id": "https://www.wikidata.org/wiki/Q1172378"
+      },
+      "prov:label": "Epistasis subset construction",
+      "sc:description": "Significant epistasis: |thermodynamic coupling| > 0.5 kcal/mol, which keeps 6,003 double mutations over 35 proteins. Sign epistasis: a disjunction of four logical conditions requiring the double mutant to exceed the boundaries of the single mutants, with a tolerance of epsilon = 0.07 kcal/mol to exclude pseudo-epistasis from measurement fluctuation near zero; this keeps 3,267 double mutations over 31 proteins."
+    },
+    {
+      "@type": "prov:Activity",
+      "prov:type": {
+        "@id": "https://www.wikidata.org/wiki/Q109719325"
+      },
+      "prov:label": "Annotation",
+      "sc:description": "No human labelling was involved. The epistasis labels and the interaction energies were derived algorithmically from thermodynamic definitions."
+    }
+  ]
+}
